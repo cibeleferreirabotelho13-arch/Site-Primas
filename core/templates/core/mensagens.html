@@ -1,0 +1,66 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Mensagens de usuários | Site Das Primas
+{% endblock %}
+
+{% block content %}
+
+<div class="pagina-mensagens">
+
+
+<h2 class="titulo-mensagens">
+    Mensagens das Primas
+</h2>
+
+<section>
+
+    <h2>
+        Veja as mensagens das Primas enviadas para o Site Das Primas
+    </h2>
+
+    <div class="nossas-mensagens">
+
+       {% for mensagem in mensagens %}
+
+    <article class="article-mensagem">
+
+        {% if mensagem.imagem %}
+            <img
+                src="{{ mensagem.imagem.url }}"
+                alt="Imagem do usuário"
+                class="imagem-mensagem"
+            >
+        {% endif %}
+
+        <div class="card-mensagem-conteudo">
+
+            <span class="nome">
+                {{ mensagem.nome }}
+            </span>
+
+            <span class="data-mensagem">
+                {{ mensagem.data }}
+            </span>
+
+            <p class="texto-mensagem">
+                {{ mensagem.mensagem }}
+            </p>
+
+        </div>
+
+    </article>
+
+{% empty %}
+
+    <p>Nenhuma mensagem encontrada.</p>
+
+{% endfor %}
+
+    </div>
+
+</section>
+
+</div>
+
+{% endblock %}

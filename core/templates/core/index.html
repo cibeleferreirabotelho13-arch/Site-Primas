@@ -1,0 +1,86 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Início | Site Das Primas
+{% endblock %}
+
+{% block content %}
+
+<section class="pagina-inicio">
+
+    <div class="mensagem">
+        <div class="mensagem_site">
+        <h1> Site Das Primas </h1>
+        </div>
+        <p>
+            Olá! Seja bem-vindo ao Site Das Primas.
+        </p>
+
+
+        <div class="deixe-sua-mensagem">
+            <p>
+                Aqui você pode deixar uma mensagem para as Primas.
+            </p>
+        <h1>
+            Tem algo para dizer?
+        </h1>
+
+
+            <h1>
+                Deixe sua mensagem no Site Das Primas!
+            </h1>
+        </div> 
+
+        <div class="link-mensagens">
+              
+              <a href="{% url 'core:enviar' %}">Enviar Mensagem</a>
+
+        </div>
+
+
+        <div class="container2">
+           Algumas Mensagens
+        </div>
+    
+
+    </div>
+
+
+    <div class="mensagens-usuarios">
+
+        {% for mensagem in site_primas %}
+
+            <article class="card-mensagem">
+
+                <div class="card-mensagem-conteudo">
+
+                    <span class="nome">
+                        {{ mensagem.nome }}
+                    </span>
+
+                    <h3>
+                        {{ mensagem.data }}
+                    </h3>
+
+                    <p>
+                        {{ mensagem.mensagem }}
+                    </p>
+                     
+
+                </div>
+
+            </article>
+
+        {% empty %}
+
+            <p class="sem-mensagens">
+                Ainda não existem mensagens no Site Das Primas.
+            </p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Editar Mensagem | Site Das Primas
+{% endblock %}
+
+{% block content %}
+
+<section class="pagina-editar-mensagem">
+
+    <div class="container-editar-mensagem">
+
+        <h1>Editar Mensagem</h1>
+
+        <div class="editar-mensagem">
+
+            <span class="editar-mensagem-icone">✉️</span>
+
+            <p>
+                Edite sua mensagem abaixo.
+            </p>
+
+        </div>
+
+        <form
+            method="post"
+            enctype="multipart/form-data"
+            class="form-editar-mensagem"
+        >
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <div class="editar-acoes">
+
+                <button
+                    type="submit"
+                    class="botao botao-principal"
+                >
+                    Salvar alterações
+                </button>
+
+                <a
+                    href="{% url 'pages:meus_recados' %}"
+                    class="botao botao-secundario"
+                >
+                    Cancelar
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+Minhas Mensagens| Site das Primas
+{% endblock %}
+
+{% block content %}
+
+<section class="guia-minhas-mensagens">
+
+    <div class="container">
+
+        <div class="meus-cabecalho">
+
+            <div>
+                <h1>Minhas Mensagens</h1>
+
+                <p>
+                    Veja as mensagens que você enviou para o site das Primas.
+                </p>
+            </div>
+
+            <a
+                href="{% url 'core:enviar' %}"
+                class="botao botao-principal"
+            >
+                Enviar outra mensagem
+            </a>
+
+        </div>
+
+
+        {% if mensagens %}
+
+            <div class="grade-minhas-mensagens">
+
+                {% for mensagem in mensagens %}
+
+                    <article class="card-minha-mensagem">
+
+                        {% if mensagem.imagem %}
+                            <img
+                                src="{{ mensagem.imagem.url }}"
+                                alt="Imagem da minha mensagem"
+                                class="imagem-minha-mensagem"
+                            >
+                        {% endif %}
+
+                {% for mensagem in mensagens %}
+
+                    <article class="card-minha-mensagem">
+
+                        {% if mensagem.imagem %}
+                            <img
+                                src="{{ mensagem.imagem.url }}"
+                                alt="Imagem da minha mensagem"
+                                class="imagem-minha-mensagem"
+                            >
+                        {% endif %}
+
+
+                        <div class="minha-mensagem-cabecalho">
+
+                            <span class="nome-usuario">
+                                {{ mensagem.nome }}
+                            </span>
+
+                            <h2>
+                                {{ mensagem.data }}
+                            </h2>
+
+                        </div>
+
+
+                        <p class="texto-recado">
+                            {{ mensagem.mensagem }}
+                        </p>
+
+
+                        <div class="meus_recados-opcoes">
+
+                            <a
+                                href="{% url 'core:detalhes_mensagem' mensagem.pk %}"
+                                class="botao botao-principal"
+                            >
+                                Ver detalhes
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="nenhum-resultado">
+
+                <h2>
+                    Nenhuma mensagem encontrada
+                </h2>
+
+                <p>
+                    Você ainda não possui mensagens enviadas para o site das Primas.
+                    Envie uma mensagem para ver suas mensagens
+                
+                </p>
+
+                <a
+                    href="{% url 'core:enviar' %}"
+                    class="botao botao-principal"
+                >
+                    Enviar mensagem
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+

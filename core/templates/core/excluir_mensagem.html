@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Excluir Mensagem | Site Das Primas
+{% endblock %}
+
+{% block content %}
+
+<section class="pagina-excluir-mensagem">
+
+    <div class="container-excluir-mensagem">
+
+        <h1>Excluir Mensagem</h1>
+
+        <div class="excluir-mensagem">
+
+            <span class="excluir-mensagem-icone">🗑️</span>
+
+            <h2>Tem certeza que deseja excluir esta mensagem?</h2>
+
+            <p>
+                <strong>Nome:</strong> {{ mensagem.nome }}
+            </p>
+
+            <p>
+                <strong>Mensagem:</strong> {{ mensagem.mensagem }}
+            </p>
+
+            <p>
+                Essa ação não poderá ser desfeita.
+            </p>
+
+        </div>
+
+        <form method="post" class="form-excluir-mensagem">
+
+            {% csrf_token %}
+
+            <div class="excluir-acoes">
+
+                <button
+                    type="submit"
+                    class="botao botao-principal"
+                >
+                    Sim, excluir
+                </button>
+
+                <a
+                    href="{% url 'core:detalhes_mensagem' mensagem.id %}"
+                    class="botao botao-secundario"
+                >
+                    Cancelar
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

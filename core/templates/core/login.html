@@ -1,0 +1,96 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+  Entrar | Site Das Primas
+{% endblock %}
+
+{% block content %}
+
+<section class="guia-login">
+
+    <div class="container-login">
+
+        <h1>Entrar</h1>
+
+        <div class="usuario-login">
+
+            {% if request.user.is_authenticated %}
+
+                <div class="mensagem-sucesso">
+                    <h2>Login realizado</h2>
+                </div>
+
+            {% else %}
+
+                <p class="texto-apoio">
+                    Digite seu email e senha.
+                </p>
+
+                {% if erro %}
+                    <div class="mensagem-erro" role="alert">
+                        {{ erro }}
+                    </div>
+                {% endif %}
+
+                <form method="post" class="form-login">
+
+                    {% csrf_token %}
+
+                    <div class="informacao-usuario">
+
+                        <div class="campo">
+                            <label for="email">E-mail</label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                            >
+                        </div>
+
+                        <div class="campo">
+                            <label for="senha">Senha</label>
+
+                            <input
+                                type="password"
+                                id="senha"
+                                name="senha"
+                                required
+                            >
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="botao botao-principal botao-login"
+                        >
+                            Entrar
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <div class="login-cadastro">
+
+                    <p>Ainda não possui uma conta?</p>
+                   <div class="botao-cadastro">
+                    <a
+                        href="{% url 'core:cadastro' %}"
+                        class="botao botao-secundario"
+                    >
+                        Crie sua conta aqui
+                    </a>
+                </div>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

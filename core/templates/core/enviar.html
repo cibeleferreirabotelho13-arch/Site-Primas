@@ -1,0 +1,119 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+   Enviar Mensagem | Site Das Primas
+{% endblock %}
+
+{% block content %}
+
+<section class="pagina-enviar">
+
+    <div class="recado">
+      
+
+        <h1>
+            Deixe sua mensagem aqui
+        </h1>
+    </div>
+
+    <div class="card-mensagem">
+
+        {% if mensagem_enviada %}
+
+            <div class="confirmacao-mensagem">
+
+                <span class="icone-sucesso">
+                    ✓
+                </span>
+
+                <h2>
+                    Recado recebido
+                </h2>
+
+                <p>
+                    Confira as informações enviadas:
+                </p>
+
+                <a
+                    href="{% url 'pages:mensagens' %}"
+                    class="botao botao-principal"
+                >
+                    Mandar outro Recado
+                </a>
+
+            </div>
+
+        {% else %}
+
+            <form method="post" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <div class="formulario">
+                    <p>
+                        Preencha as informações abaixo.
+                    </p>
+                </div>
+
+                {% if form.errors %}
+                    <div class="erros-formulario">
+                        {{ form.errors }}
+                    </div>
+                {% endif %}
+
+                <div class="mensagens">
+
+                    <label for="{{ form.nome.id_for_label }}">
+                        Seu nome
+                    </label>
+
+                    {{ form.nome }}
+
+                </div>
+
+                <div class="mensagens">
+
+                    <label for="{{ form.data.id_for_label }}">
+                        Data
+                    </label>
+
+                    {{ form.data }}
+
+                </div>
+
+                <div class="mensagens">
+
+                    <label for="{{ form.mensagem.id_for_label }}">
+                        Mensagem
+                    </label>
+
+                    {{ form.mensagem }}
+
+                </div>
+
+                <div class="mensagens">
+
+                    <label for="{{ form.imagem.id_for_label }}">
+                        Imagem (opcional)
+                    </label>
+
+                    {{ form.imagem }}
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="botao botao-principal botao-mensagem"
+                >
+                    Compartilhar Recado
+                </button>
+
+            </form>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

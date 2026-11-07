@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+  {{ codigo_erro }} | Site Das Primas
+{% endblock %}
+
+{% block content %}
+  <section class="pagina-erro">
+    <div class="container-erro">
+      <div class="card-erro">
+        <span class="icone-erro">
+            🚫
+        </span>
+        <span class="codigo-erro">{{ codigo_erro }}</span>
+
+        <h1>{{ titulo_erro }}</h1>
+
+        <p>{{ mensagem_erro }}</p>
+
+        <div class="acoes-erro">
+          <a href="{% url 'core:index' %}" class="botao botao-principal">Ir para pagina inicial</a>
+
+          <a href="{% url 'core:mensagens' %}" class="botao botao-secundario">Mensagens das Primas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+ 
