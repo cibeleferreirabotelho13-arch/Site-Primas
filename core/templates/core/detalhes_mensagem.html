@@ -1,7 +1,13 @@
+
 {% extends 'core/base.html' %}
+{% load static %}
 
 {% block title %}
-  Detalhes da Mensagem | Site Das Primas
+    Detalhes da Mensagem | Site Das Primas
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/css/detalhes_mensagem.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -9,28 +15,63 @@
 <section class="pagina-detalhes-mensagem">
 
     <div class="container-detalhes-mensagem">
+
         <h1>Detalhes da Mensagem</h1>
-    </div>
 
-    <div class="detalhes-mensagem">
+        <div class="detalhes-mensagem">
 
-        <span class="detalhes-mensagem-icone">💋</span>
+            <span class="detalhes-mensagem-icone">💋</span>
 
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
+            <div class="informacoes-mensagem">
 
-            {{ form.as_p }}
+                <p>
+                    <strong>Nome:</strong>
+                    {{ mensagem.nome }}
+                </p>
 
-   
-</form>
+               <p>
+                  <strong>Data:</strong>
+                 {{ mensagem.data|default:"Data não cadastrada" }}
+               </p>
+                <p>
+                    <strong>Mensagem:</strong>
+                </p>
 
-        <a href="{% url 'core:editar_mensagem' mensagem.id %}">
-            Editar
-        </a>
+                <div class="texto-mensagem">
+                    {{ mensagem.mensagem|linebreaksbr }}
+                </div>
 
-        <a href="{% url 'core:excluir_mensagem' mensagem.id %}">
-            Excluir
-        </a>
+                {% if mensagem.imagem %}
+                    <div class="imagem-mensagem">
+                        <strong>Imagem enviada:</strong>
+
+                        <img src="{{ mensagem.imagem.url }}"
+                             alt="Imagem da mensagem">
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <div class="acoes-mensagem">
+
+                <a href="{% url 'core:editar_mensagem' mensagem.id %}"
+                   class="botao-editar">
+                    Editar
+                </a>
+
+                <a href="{% url 'core:excluir_mensagem' mensagem.id %}"
+                   class="botao-excluir">
+                    Excluir
+                </a>
+
+                <a href="{% url 'core:minhas_mensagens' %}"
+                   class="botao-voltar">
+                    Voltar
+                </a>
+
+            </div>
+
+        </div>
 
     </div>
 

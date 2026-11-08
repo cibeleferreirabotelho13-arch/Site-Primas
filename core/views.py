@@ -24,40 +24,42 @@ def index(request: HttpRequest) -> HttpResponse:
 
 @login_required
 def enviar(request: HttpRequest) -> HttpResponse:
+
+    mensagem_enviada = False
+
     if request.method == "POST":
+
         form = MensagemForm(
             request.POST,
             request.FILES,
         )
 
         if form.is_valid():
+
             mensagem = form.save(commit=False)
             mensagem.usuario = request.user
             mensagem.save()
 
             messages.success(
                 request,
-                "Mensagem enviada com sucesso.",
+                "Mensagem enviada com sucesso."
             )
 
-            return redirect(
-                "core:detalhes_mensagem",
-                id=mensagem.pk,
-            )
+            mensagem_enviada = True
+
     else:
         form = MensagemForm()
 
     contexto = {
         "form": form,
+        "mensagem_enviada": mensagem_enviada,
     }
 
     return render(
         request,
-        "core/mensagens.html",
+        "core/enviar.html",
         contexto,
     )
-
-
 def mensagens(request: HttpRequest) -> HttpResponse:
 
     termo_busca = request.GET.get("q", "").strip()
@@ -93,11 +95,11 @@ def cadastro_view(request: HttpRequest) -> HttpResponse:
 
         if senha != confirmar_senha:
             contexto["erro"] = "As senhas informadas não coincidem."
-            return render(request, "pages/cadastro.html", contexto)
+            return render(request, "core/cadastro.html", contexto)
 
         if User.objects.filter(username=email).exists():
             contexto["erro"] = "Já existe uma conta cadastrada com este e-mail."
-            return render(request, "pages/cadastro.html", contexto)
+            return render(request, "core/cadastro.html", contexto)
 
         User.objects.create_user(
             username=email,
@@ -232,7 +234,7 @@ def minhas_mensagens(request: HttpRequest) -> HttpResponse:
 
     return render(
         request=request,
-        template_name="core/meus_recados.html",
+        template_name="core/minhas_mensagens.html",
         context=contexto
     )
 

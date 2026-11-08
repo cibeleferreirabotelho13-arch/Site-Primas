@@ -19,11 +19,11 @@ urlpatterns = [
         name='enviar',
     ),
 
-    path(
-        'mensagens/',
-        views.mensagens,
-        name='mebsagens',
-    ),
+   path(
+    'mensagens/',
+    views.mensagens,
+    name='mensagens',
+),
 
     path(
         'cadastro/',

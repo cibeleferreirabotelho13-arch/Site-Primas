@@ -1,109 +1,128 @@
+
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
-      {% block title %}
-       Site Das Primas
-      {% endblock %}
+        {% block title %}
+            Site Das Primas
+        {% endblock %}
     </title>
 
-    <link rel="stylesheet" href="{% static 'core/style.css' %}" />
-  </head>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}?v=2">
+</head>
 
-  <body>
+<body>
+
     <header class="cabecalho">
-      <div class="container cabecalho-conteudo">
-        <a href="{% url 'pages:index' %}" class="logo">Site Das Primas</a>
 
-        <nav aria-label="Navegação principal">
-          <ul class="menu">
-            <li>
-              <a href="{% url 'core:index' %}">Início</a>
-            </li>
-            
-            {% if not request.user.is_authenticated %}
-            
-            <li>
-              <a href="{% url 'core:login' %}">Login</a>
-            </li>
-            {% else %}
-            
-            
-            
-            
-            <li>
-              <a href="{% url 'core:minhas_mensagens' %}">Minhas Mensagens</a>
-            </li>
-            
-            
-            
-            <li>
-              <a href="{% url 'core:enviar' %}">Enviar Mensagem</a>
-            </li>
-            
-            {% endif %}
-            
-            {% if not request.user.is_authenticated %}
-            
-            <li>
-              <a href="{% url 'core:cadastro' %}">Cadastro</a>
-            </li>
-            
-            {% endif %}
-            
-            <li>
-              <a href="{% url 'core:mensagens' %}">Mensagens</a>
-            </li>
-            
-            
-            <span>
-              {% if user.first_name %}
-              Olá, {{ user.first_name }}
-              {% else %}
-              Olá, {{ user.username }}
-              {% endif %}
-            </span>
-            
-            <li>
-              <a href="{% url 'core:logout' %}" class="botao-menu">Sair</a>
-            </li>
+        <div class="container cabecalho-conteudo">
 
-  
-               
-               
-          </ul>
-        </nav>
-      </div>
+            <a href="{% url 'core:index' %}" class="logo">
+                Site Das Primas
+            </a>
+
+            <nav aria-label="Navegação principal">
+
+                <ul class="menu">
+
+                    <li>
+                        <a href="{% url 'core:index' %}">Início</a>
+                    </li>
+
+                    {% if not request.user.is_authenticated %}
+
+                        <li>
+                            <a href="{% url 'core:login' %}">Login</a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'core:cadastro' %}">Cadastro</a>
+                        </li>
+
+                    {% else %}
+
+                        <li>
+                            <a href="{% url 'core:minhas_mensagens' %}">
+                                Minhas Mensagens
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'core:enviar' %}">
+                                Enviar Mensagem
+                            </a>
+                        </li>
+
+                        <li>
+                            <span>
+                                {% if user.first_name %}
+                                    Olá, {{ user.first_name }}
+                                {% else %}
+                                    Olá, {{ user.username }}
+                                {% endif %}
+                            </span>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'core:logout' %}" class="botao-menu">
+                                Sair
+                            </a>
+                        </li>
+
+                    {% endif %}
+
+                    <li>
+                        <a href="{% url 'core:mensagens' %}">
+                            Mensagens
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+        </div>
+
     </header>
 
-     {% if messages %}
-      <div class="mensagens-sistema">
-        <div class="container">
-          {% for message in messages %}
-            <div class="mensagem-sistema {{ message.tags }}" role="alert">
-              <span>{{ message }}</span>
+    {% if messages %}
+
+        <div class="mensagens-sistema">
+
+            <div class="container">
+
+                {% for message in messages %}
+
+                    <div class="mensagem-sistema {{ message.tags }}" role="alert">
+                        <span>{{ message }}</span>
+                    </div>
+
+                {% endfor %}
+
             </div>
-          {% endfor %}
+
         </div>
-      </div>
+
     {% endif %}
 
     <main>
-      {% block content %}
 
-      {% endblock %}
+        {% block content %}
+        {% endblock %}
+
     </main>
 
     <footer class="rodape">
-     
-        <p> Site Das Primas</p>
-      </div>
+
+        <p>Site Das Primas</p>
+
     </footer>
-  </body>
+
+</body>
 </html>

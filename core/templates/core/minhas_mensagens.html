@@ -1,7 +1,8 @@
+
 {% extends 'core/base.html' %}
 
 {% block title %}
-Minhas Mensagens| Site das Primas
+Minhas Mensagens | Site das Primas
 {% endblock %}
 
 {% block content %}
@@ -29,7 +30,6 @@ Minhas Mensagens| Site das Primas
 
         </div>
 
-
         {% if mensagens %}
 
             <div class="grade-minhas-mensagens">
@@ -46,19 +46,6 @@ Minhas Mensagens| Site das Primas
                             >
                         {% endif %}
 
-                {% for mensagem in mensagens %}
-
-                    <article class="card-minha-mensagem">
-
-                        {% if mensagem.imagem %}
-                            <img
-                                src="{{ mensagem.imagem.url }}"
-                                alt="Imagem da minha mensagem"
-                                class="imagem-minha-mensagem"
-                            >
-                        {% endif %}
-
-
                         <div class="minha-mensagem-cabecalho">
 
                             <span class="nome-usuario">
@@ -71,11 +58,9 @@ Minhas Mensagens| Site das Primas
 
                         </div>
 
-
                         <p class="texto-recado">
                             {{ mensagem.mensagem }}
                         </p>
-
 
                         <div class="meus_recados-opcoes">
 
@@ -90,6 +75,29 @@ Minhas Mensagens| Site das Primas
 
                     </article>
 
+                {% empty %}
+
+                    <div class="nenhum-resultado">
+
+                        <h2>
+                            Nenhuma mensagem encontrada
+                        </h2>
+
+                        <p>
+                            Você ainda não possui mensagens enviadas
+                            para o site das Primas.
+                            Envie uma mensagem para ver suas mensagens.
+                        </p>
+
+                        <a
+                            href="{% url 'core:enviar' %}"
+                            class="botao botao-principal"
+                        >
+                            Enviar mensagem
+                        </a>
+
+                    </div>
+
                 {% endfor %}
 
             </div>
@@ -103,9 +111,9 @@ Minhas Mensagens| Site das Primas
                 </h2>
 
                 <p>
-                    Você ainda não possui mensagens enviadas para o site das Primas.
-                    Envie uma mensagem para ver suas mensagens
-                
+                    Você ainda não possui mensagens enviadas
+                    para o site das Primas.
+                    Envie uma mensagem para ver suas mensagens.
                 </p>
 
                 <a
@@ -124,6 +132,3 @@ Minhas Mensagens| Site das Primas
 </section>
 
 {% endblock %}
-
-
-
